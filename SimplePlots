@@ -17,22 +17,22 @@ import pandas as pd
 import numpy as np
 
 ### Bring in file from data folder
-XRF = pd.read_csv("C:\data\XRF2026.csv") #Pandas csv reader
-XRF_names = XRF.columns[2::] #names of the elements from the headers of each column to use later in a plot
-print(XRF_names) #check for element of interest
+XRF = pd.read_csv("C:\data\XRF2026.csv")  #Pandas csv reader
+XRF_names = XRF.columns[2::]              #names of the elements from the headers of each column to use later in a plot
+print(XRF_names)                          #check for element of interest
 
 ### Making a data array to call for plots
-data_frame = np.asarray(XRF.iloc[:,2::]) #XRF data only- should start with 'Al'
-XRFTime = np.asarray(XRF.iloc[:,1]) #second column is time in years before present (y BP)
-XRFdepth = np.asarray(XRF.iloc[:,0]) #first column is sediment core depth (cm)
+data_frame = np.asarray(XRF.iloc[:,2::])   #XRF data only- should start with 'Al'
+XRFTime = np.asarray(XRF.iloc[:,1])        #second column is time in years before present (y BP)
+XRFdepth = np.asarray(XRF.iloc[:,0])       #first column is sediment core depth (cm)
 
-print(XRF_names[0]) # use 'XRF names' to select elements for plotting by cycling value
+print(XRF_names[0])                        # use 'XRF names' to select elements for plotting by cycling value
 
 ### Plotting the data
-fig, ax = plt.subplots(10) #10 element subpot for comparison
+fig, ax = plt.subplots(10)                 #10 element subpot for comparison
 
-ax[0].scatter(XRFTime,data_frame[:,0]) #use 'XRF_names' to select element, aligns with 'data_frame'
-ax[0].set_title(XRF_names[0], loc='left') #this makes sure labels and plots align as we cycle through plots
+ax[0].scatter(XRFTime,data_frame[:,0])     #use 'XRF_names' to select element, aligns with 'data_frame'
+ax[0].set_title(XRF_names[0], loc='left')  #this makes sure labels and plots align as we cycle through plots
 
 ax[1].plot(XRFTime,data_frame[:,6])
 ax[1].set_title(XRF_names[6], loc='left')
