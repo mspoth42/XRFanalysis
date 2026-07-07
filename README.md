@@ -1,5 +1,6 @@
 # XRFanalysis
 This repository is a collection of scripts to plot and analyze XRF data from sediment core scans. 
-# So far I just have plot visualization as 'SimplePlots'
 
-# Upcoming is z-score, PCA analysis, and coorelation between elements
+So far I just have plot visualization as 'SimplePlots'
+Upcoming is z-score, PCA analysis, and coorelation between elements
+I can also make list of element groups based on general proxy associations (i.e. runoff, tephra)
