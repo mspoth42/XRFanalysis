@@ -1,0 +1,65 @@
+### READ ME
+# This is a simple script to plot the large dataset from XRF scans
+# With over 70 elements that may or may not be significant, there is a lot to compare and plot.
+# As a first pass, I like to select 10 elements on a stack plot by depth then age
+# This scripts allows me to label each element by aligning the data fame with the name column
+# as I switch out my elements.
+
+# 'XRF2026.csv' is currently unpublished data from Baboon Lakes, Sierra Nevada, California
+# File can be replaced by any XRF output with the first column for depth and second column for age
+# subsequent columns are the elemental counts. All columns are labeled in row 0.
+
+#contact: Meghan Spoth-Ascencao mmspoth@syr.edu
+
+### Using libraries pyplot from matplotlib (3.10.8), pandas (3.0.0), and numpy (2.4.2)
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+### Bring in file from data folder
+XRF = pd.read_csv("C:\data\XRF2026.csv") #Pandas csv reader
+XRF_names = XRF.columns[2::] #names of the elements from the headers of each column to use later in a plot
+print(XRF_names) #check for element of interest
+
+### Making a data array to call for plots
+data_frame = np.asarray(XRF.iloc[:,2::]) #XRF data only- should start with 'Al'
+XRFTime = np.asarray(XRF.iloc[:,1]) #second column is time in years before present (y BP)
+XRFdepth = np.asarray(XRF.iloc[:,0]) #first column is sediment core depth (cm)
+
+print(XRF_names[0]) # use 'XRF names' to select elements for plotting by cycling value
+
+### Plotting the data
+fig, ax = plt.subplots(10) #10 element subpot for comparison
+
+ax[0].scatter(XRFTime,data_frame[:,0]) #use 'XRF_names' to select element, aligns with 'data_frame'
+ax[0].set_title(XRF_names[0], loc='left') #this makes sure labels and plots align as we cycle through plots
+
+ax[1].plot(XRFTime,data_frame[:,6])
+ax[1].set_title(XRF_names[6], loc='left')
+
+ax[2].plot(XRFTime,data_frame[:,11])
+ax[2].set_title(XRF_names[11], loc='left')
+
+ax[3].plot(XRFTime,data_frame[:,5])
+ax[3].set_title(XRF_names[5], loc='left')
+
+ax[4].plot(XRFTime,data_frame[:,10])
+ax[4].set_title(XRF_names[10], loc='left')
+
+ax[5].plot(XRFTime,data_frame[:,19])
+ax[5].set_title(XRF_names[19], loc='left')
+
+ax[6].plot(XRFTime,data_frame[:,2])
+ax[6].set_title(XRF_names[2], loc='left')
+
+ax[7].plot(XRFTime,data_frame[:,1])
+ax[7].set_title(XRF_names[1], loc='left')
+
+ax[8].plot(XRFTime,data_frame[:,7])
+ax[8].set_title(XRF_names[7], loc='left')
+
+ax[9].plot(XRFTime,data_frame[:,22])
+ax[9].set_title(XRF_names[22], loc='left')
+ax[9].set_xticks(np.arange(0, 12000, step=1000)) #attach to last plot for tick marks
+
+plt.show()
